@@ -8,7 +8,6 @@ import {
 import { auth } from './firebase';
 import { User as FirebaseUser } from 'firebase/auth'; // Firebase の User 型をインポート
 
-// 型定義
 interface AuthContextType {
   user: FirebaseUser | null;
 }
@@ -18,7 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function useAuthContext(): AuthContextType {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuthContext must be used within an AuthProvider');
+    throw new Error('useAuthContext undefined!');
   }
   return context;
 }
