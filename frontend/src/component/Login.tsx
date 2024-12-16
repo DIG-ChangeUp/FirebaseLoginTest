@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState<string>('');
   const auth = getAuth(); // Firebase Auth インスタンスを取得
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,14 +23,17 @@ const Login: React.FC = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('ログイン成功');
-    } catch (error) {
+      navigate('/');
+    } catch (error: any) {
       console.error('ログインエラー:', error);
+      setError(error.message);
     }
   };
 
   return (
     <div>
       <h1>ログイン</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">メールアドレス</label>

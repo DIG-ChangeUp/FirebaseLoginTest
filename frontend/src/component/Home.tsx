@@ -1,5 +1,5 @@
 import { auth } from '../auth/firebase';
-import { useNavigate } from 'react-router-dom'; // useNavigateを使用
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../auth/authContext.tsx';
 
 const Home = () => {
