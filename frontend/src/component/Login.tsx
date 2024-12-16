@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import GoogleAuthButton from '../auth/GoogleAuthButton.tsx';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -55,6 +56,10 @@ const Login: React.FC = () => {
           ユーザ登録は<Link to={'/signup'}>こちら</Link>から
         </div>
       </form>
+      <div>
+        <p>Googleを使って認証はこちら</p>
+        <GoogleAuthButton />
+      </div>
     </div>
   );
 };
