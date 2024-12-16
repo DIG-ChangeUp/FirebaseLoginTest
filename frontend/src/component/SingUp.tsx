@@ -3,10 +3,13 @@ import { useState } from 'react';
 
 import { auth } from '../auth/firebase.ts';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -22,8 +25,10 @@ const SignUp: React.FC = () => {
         password
       );
       console.log('User created:', userCredential.user);
-    } catch (error) {
+      navigate('/');
+    } catch (error: any) {
       console.error('Error creating user:', error);
+      setError(error.message);
     }
   };
 
@@ -38,6 +43,7 @@ const SignUp: React.FC = () => {
   return (
     <div>
       <h1>ユーザ登録</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>メールアドレス</label>

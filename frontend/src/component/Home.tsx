@@ -1,6 +1,7 @@
 import { auth } from '../auth/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../auth/authContext.tsx';
+import { useEffect } from 'react';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,9 +16,16 @@ const Home = () => {
     }
   };
 
+  // userが存在しない場合にリダイレクト
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]); // user または navigate が変更された場合にのみ実行
+
   if (!user) {
-    navigate('/login'); // userが存在しない場合にリダイレクト
-    return null; // リダイレクト後に不要なコンテンツをレンダリングしない
+    // navigateによるリダイレクトが完了するまで何もレンダリングしない
+    return null;
   }
 
   return (
