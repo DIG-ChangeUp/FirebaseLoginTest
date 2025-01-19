@@ -1,13 +1,12 @@
-import SignUp from './component/SingUp.tsx';
-import { AuthProvider } from './auth/authContext.tsx';
+import SignUp from './pages/SingUp.tsx';
+import { AuthProvider } from './auth/AuthContext.tsx';
 import { Route, Routes } from 'react-router-dom';
-import Home from './component/Home.tsx';
-import Login from './component/Login.tsx';
+import Home from './pages/Home.tsx';
+import Login from './pages/Login.tsx';
 
 function App() {
   return (
     <>
-      <h1>Firebase auth sample!</h1>
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -6,16 +6,17 @@ import {
   ReactNode,
 } from 'react';
 import { auth } from './firebase';
-import { User as FirebaseUser } from 'firebase/auth'; // Firebase の User 型をインポート
+import { User as FirebaseUser } from 'firebase/auth';
+import MyLoading from '../component/MyLoading.tsx';
 
 interface AuthContextType {
-  user: FirebaseUser | null;
+  authUser: FirebaseUser | null;
   loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function useAuthContext(): AuthContextType {
+export function UseAuthContext(): AuthContextType {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuthContext undefined!');
@@ -28,14 +29,14 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<FirebaseUser | null>(null);
+  const [authUser, setAuthUser] = useState<FirebaseUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Firebase Auth の状態変化を監視
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      console.log(currentUser);
-      setUser(currentUser);
+      //console.log(currentUser);
+      setAuthUser(currentUser);
       setLoading(false);
     });
 
@@ -46,11 +47,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const value: AuthContextType = {
-    user,
+    authUser,
     loading,
   };
   if (loading) {
-    return <p>loading...</p>;
+    return <MyLoading />;
   } else {
     return (
       <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
