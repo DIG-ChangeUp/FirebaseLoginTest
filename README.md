@@ -1,14 +1,12 @@
 # Firebase Authを利用したログイン機能のサンプルです  
-___  
+
 ### 参考サイトURL
 ___
 [【完全版】ReactのFirebase Authentication(認証)を基礎からマスターする](https://reffect.co.jp/react/react-firebase-auth)
 
 ### page image
 ___
-<img width="200" alt="sign-up" src="frontend/images/signup.png">
-<img width="200" alt="sign-up" src="frontend/images/login.png">
-<img width="200" alt="sign-up" src="frontend/images/home.png">
+<img width="200" alt="sign-up" src="frontend/images/signup.png">  <img width="200" alt="sign-up" src="frontend/images/login.png">  <img width="200" alt="sign-up" src="frontend/images/home.png">
 
 ### 開発環境
 ___
@@ -32,7 +30,7 @@ Passwordは６文字以上が必要です。
 入力情報が間違っているとエラー表示が出ます。  
 
 
-### top page
+#### top page
 ログイン状態になると、画面表示されます。  
 ログイン状態でない場合は、自動的にログインページにリダイレクトされます。  
 ログアウトボタンを押すと、ログアウトできます。
